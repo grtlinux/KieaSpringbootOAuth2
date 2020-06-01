@@ -1,0 +1,57 @@
+#
+# TestSpringBoot 0405 - WebFront
+# 2020-05-31
+#
+
+server.port: 8080
+
+spring:
+
+  h2.console:
+    enabled: true
+    path: /h2
+    settings:
+      trace: false
+      web-allow-others: true
+  
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  
+  jpa:
+    show-sql: true
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate.ddl-auto: update
+  
+  thymeleaf:
+    encoding: utf-8
+    cache: false
+    prefix: classpath:templates/
+    suffix: .html
+  
+  devtools.livereload.enabled: true
+  
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 881218558153-ndr868i68rlofoo4l2gb488ksabi5q23.apps.googleusercontent.com
+            client-secret: kq6zIo0myJotHK5_0irhtYnW
+          facebook:
+            client-id: 465358593799840
+            client-secret: a37286e3dae00dcdce628f40dfe363f5
+custom:
+  oauth2:
+    kakao:
+      client-id: 1b8ff676ae01724ed77437f98d399543
+
+spring.servlet.multipart:
+  max-file-size: 1GB
+  max-request-size: 1GB
+
+
+
