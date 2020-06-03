@@ -28,3 +28,4 @@ spring:
   
   devtools.livereload.enabled: true
 
+  data.rest.base-path: /api
