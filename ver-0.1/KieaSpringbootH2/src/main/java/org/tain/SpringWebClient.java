@@ -63,11 +63,11 @@ public class SpringWebClient {
 	private static void test02() {
 		SpringWebClient springWebClient = new SpringWebClient();
 		
-		springWebClient.findAll();
-		springWebClient.findById(4);
-		//springWebClient.create(Stmt.join(1, 1101, "", ""));
-		//springWebClient.update(Stmt.join(1, 1101, "", ""));
-		//springWebClient.delete(4);
+		if (flag) springWebClient.findAll();
+		if (flag) springWebClient.findById(4);
+		if (!flag) springWebClient.create(Stmt.join(1, 1101, "", ""));
+		if (!flag) springWebClient.update(Stmt.join(1, 1101, "", ""));
+		if (!flag) springWebClient.delete(4);
 	}
 
 	private void findAll() {
@@ -90,20 +90,29 @@ public class SpringWebClient {
 		System.out.println(">>>>> " + monoStmt);
 	}
 
-	private void create(Stmt join) {
-		// TODO Auto-generated method stub
-		
+	private void create(Stmt stmt) {
+		Mono<Stmt> monoStmt = this.webClient.post()
+				.uri("/stmts")
+				.body(Mono.just(stmt), Stmt.class)
+				.retrieve()
+				.bodyToMono(Stmt.class);
+		System.out.println(">>>>> " + monoStmt);
 	}
 
-	private void update(Stmt join) {
-		// TODO Auto-generated method stub
-		
+	private void update(Stmt stmt) {
+		Mono<Stmt> monoStmt = this.webClient.put()
+				.uri("/stmts/" + stmt.getId())
+				.body(Mono.just(stmt), Stmt.class)
+				.retrieve()
+				.bodyToMono(Stmt.class);
+		System.out.println(">>>>> " + monoStmt);
 	}
 
-	private void delete(int i) {
-		// TODO Auto-generated method stub
-		
+	private void delete(Integer id) {
+		Mono<Void> monoStmt = this.webClient.delete()
+				.uri("/stmts/" + id)
+				.retrieve()
+				.bodyToMono(Void.class);
+		System.out.println(">>>>> " + monoStmt);
 	}
-	
-	
 }
