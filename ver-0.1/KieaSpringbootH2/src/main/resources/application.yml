@@ -29,3 +29,5 @@ spring:
   devtools.livereload.enabled: true
 
   data.rest.base-path: /api
+
+  codec.max-in-memory-size: 10MB
