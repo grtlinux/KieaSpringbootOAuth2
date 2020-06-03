@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StopWatch;
 import org.springframework.web.client.RestTemplate;
 import org.tain.domain.Stmt;
 
@@ -54,6 +55,8 @@ public class SpringRestTemplateClient {
 		}
 		
 		if (flag) {
+			StopWatch stopWatch = new StopWatch();
+			stopWatch.start();
 			System.out.println("----------------------------------------");
 			ResponseEntity<String> response = restTemplate.exchange(GET_STMTS_ENDPOINT_URL, HttpMethod.GET, null, String.class);
 			String data = response.getBody();
@@ -71,6 +74,8 @@ public class SpringRestTemplateClient {
 			for (Stmt stmt : lstStmt) {
 				System.out.println(">>>>> " + stmt);
 			}
+			stopWatch.stop();
+			System.out.println(">>>>> " + stopWatch.prettyPrint());
 		}
 		
 		if (!flag) {
